@@ -1,1 +1,0 @@
-/home/niranjan/.bashrc
