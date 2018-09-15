@@ -126,3 +126,11 @@ export PATH="/anaconda/bin:$PATH"
 
 
 pdfmerge() { gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=$@ ; }
+
+# to check continuous mem usage
+alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head -n1; sleep 1; done"
+
+# Go to a top level directory - parent for many git repos
+# run below code to get all repos updated in one go.
+alias pullgits='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git pull; cd ..; done'
+alias statusgits='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git status; cd ..; done'
