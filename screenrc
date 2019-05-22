@@ -1,0 +1,4 @@
+altscreen on
+
+# Enable mouse scrolling and scroll bar history scrolling
+termcapinfo xterm* ti@:te@
