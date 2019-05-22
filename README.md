@@ -1,5 +1,6 @@
 # handy_codes
 Some collection of handy codes/templates
+Keep backup of various linux RCs.
 
 # License snippet
 Anyone is free to copy, modify, publish, use, compile, sell, or
