@@ -132,7 +132,7 @@ alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head
 
 # Go to a top level directory - parent for many git repos
 # run below code to get all repos updated in one go.
-alias pullgits='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git stash; git pull --rebase; git stasth pop; date; cd ..; done'
+alias pullgits='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git stash; git pull --rebase; git stash pop; date; cd ..; done'
 alias statusgits='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git status; cd ..; done'
 alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head -n1; sleep 1; done"
 
@@ -144,6 +144,10 @@ export LS_COLORS
 export PS1='[\[\e[1;32m\]\u($SHLVL) @ \h\[\e[0m\] \[\e[1;46m\]\w\[\e[0m\]]\n\D{%a, %F, %T} \$ '
 alias beep="echo -ne '\007'"
 alias beep3="for ((i=1; i<=3; i++)); do beep; sleep 1;done"
+#alias getVol='amixer sget "Master" | tail -n1 | perl -n -e"/(\d+\%)/ && print $1"'
+alias getVol="amixer get \"Master\" | tail -n1 | perl -ne'/(\\d+\\%)/ && print \$1'"
+alias setLoud="amixer -q set 'Master' 70%"
+alias setLsoft="amixer -q set 'Master' 20%"
 alias db3="date && beep3"
 
 
