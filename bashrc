@@ -134,6 +134,9 @@ alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head
 # run below code to get all repos updated in one go.
 alias gitpulls='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git stash; git pull --rebase; git stash pop; date; cd ..; done'
 alias gitstatuses='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git status; cd ..; done'
+alias gitadds='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git add .; cd ..; done'
+alias gitcommits='gitadds; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git commit -am "dummy message"; cd ..; done'
+alias gitpushes='gitcommits; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git push; cd ..; done'
 
 # Reference : https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
 LS_COLORS=$LS_COLORS:'di=1;33:' ; # Make directories appear Yellow
