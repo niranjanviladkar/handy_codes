@@ -146,10 +146,50 @@ export LS_COLORS
 export PS1='[\[\e[1;32m\]\u($SHLVL) @ \h\[\e[0m\] \[\e[1;46m\]\w\[\e[0m\]]\n\D{%a, %F, %T} \$ '
 alias beep="echo -ne '\007'"
 alias beep3="for ((i=1; i<=3; i++)); do beep; sleep 1;done"
-#alias getVol='amixer sget "Master" | tail -n1 | perl -n -e"/(\d+\%)/ && print $1"'
 alias getVol="amixer get \"Master\" | tail -n1 | perl -ne'/(\\d+\\%)/ && print \$1'"
 alias setLoud="amixer -q set 'Master' 70%"
-alias setLsoft="amixer -q set 'Master' 20%"
+alias setSoft="amixer -q set 'Master' 20%"
 alias db3="date && beep3"
 
 
+# Go to a top level directory - parent for many git repos
+# run below code to get all repos updated in one go.
+alias gitpulls='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git stash; git pull --rebase; git stash pop; date; cd ..; done'
+alias gitstatuss='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git status; cd ..; done'
+alias gitadds='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git add .; cd ..; done'
+alias gitcommits='gitadds; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git commit -am "dummy message"; cd ..; done'
+alias gitpushes='gitcommits; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git push; cd ..; done'
+alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head -n1; sleep 1; done"
+alias notifySlack="curl -X POST -H 'Content-type: application/json' --data '{\"message\":\"You are needed!\"}' https://hooks.slack.com/workflows/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"
+alias notifySlack3Times="notifySlack; sleep 1; notifySlack; sleep 1; notifySlack"
+alias bn3="echo -n \"Completed at : \"; date; beep3; notifySlack3Times"
+
+# https://github.com/mobile-shell/mosh/issues/793
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# Wiki on How+to+Set-Up+tmux
+alias bb='ssh hostname -t "tmux attach || tmux new"'
+
+decaf() {
+    local vpid=$(pgrep vpn)
+    if [[ ! $vpid ]]; then
+        printf '%s\n' "VPN process not running"
+        return 1
+    fi
+    local cpid=$(pgrep caffeinate)
+    if [[ $cpid ]]; then
+        caffeinate_pid=$(ps -o args -p "$cpid" | awk 'NR==2 {print $3}')
+        if [[ $caffeinate_pid == $vpid ]]; then
+            printf '%s\n' "Alreading caffeinating"
+            return 0
+        fi
+    fi
+
+    printf '%s\n' "Caffeinating PID $vpid"
+    caffeinate -iw "$vpid" & disown
+    return $?
+}
+# https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
+alias mountld1="sudo diskutil umount force ~/sshfs && sudo sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa username@hostnameToMount.linkedin.biz:/Remote/AbsPath/toMount ~/sshfs"
