@@ -160,7 +160,7 @@ alias gitadds='for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; 
 alias gitcommits='gitadds; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git commit -am "dummy message"; cd ..; done'
 alias gitpushes='gitcommits; for dir in `ls -1`; do echo -e "\n\n=========== $dir "; cd $dir; git push; cd ..; done'
 alias checkmem="free -h | head -n1;  while [[ 1 ]]; do free -h | tail -n2 | head -n1; sleep 1; done"
-alias notifySlack="curl -X POST -H 'Content-type: application/json' --data '{\"message\":\"You are needed!\"}' https://hooks.slack.com/workflows/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"
+alias notifySlack="curl -X POST -H 'Content-type: application/json' --data '{\"message\":\"You are needed!\"}' https://hooks.slack.com/workflows-URL"
 alias notifySlack3Times="notifySlack; sleep 1; notifySlack; sleep 1; notifySlack"
 alias bn3="echo -n \"Completed at : \"; date; beep3; notifySlack3Times"
 
