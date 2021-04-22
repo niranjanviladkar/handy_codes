@@ -193,4 +193,3 @@ decaf() {
 }
 # https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
 alias mountld1="sudo diskutil umount force ~/sshfs && sudo sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa username@hostnameToMount.linkedin.biz:/Remote/AbsPath/toMount ~/sshfs"
-
